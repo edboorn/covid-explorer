@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The data and documentation for the APIS that are being used to drive the app, can be found [here](https://documenter.getpostman.com/view/2568274/SzS8rjbe?version=latest#149a7702-2774-4328-815d-ab66afc0351c)
+
 ## Available Scripts
 
 In the project directory, you can run:
