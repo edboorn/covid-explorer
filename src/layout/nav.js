@@ -9,7 +9,7 @@ import {
 // Page Imports
 import Home from "../pages/home/home";
 import About from "../pages/about/about";
-import ContryData from "../pages/country-specific/country-specific";
+import CountryData from "../pages/country-specific/country-specific";
 
 export default function Nav() {
   const navStyle = {
@@ -34,7 +34,7 @@ export default function Nav() {
         </nav>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/country-data" exact component={ContryData} />
+          <Route path="/country-data" exact component={CountryData} />
           <Route path="/About" exact component={About} />
         </Switch>
       </div>
