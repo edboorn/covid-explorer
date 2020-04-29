@@ -11,12 +11,10 @@ import {
 } from "recharts";
 
 const globaltimeseriesgraph = (graphData) => {
-    console.log(graphData)
   return (
     <div>
-        <p> Data Points : {graphData.graphData.count}</p>
       <ResponsiveContainer width="95%" height={700}>
-        <LineChart data={graphData.graphData}>
+        <LineChart data={graphData.graphData.formattedData}>
           <Line
             strokeWidth={2}
             type="monotone"

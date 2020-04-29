@@ -18,8 +18,9 @@ export const fetchGlobalStats = async () => {
 //Time Series of Global Data
 export const globalTimeseries = async () => {
     try {
-        const {data : {count, result}} = await axios.get(`${url}/global/count`);
-        return {count, result} 
+        const {data} = await axios.get(`${url}/global/count`);
+        const formattedData = Object.entries(data.result).map(([key, value]) => ({...value, date: key})) // Moves the date from the index to inside the object
+        return {formattedData} 
     }
     catch (error){
         return error

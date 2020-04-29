@@ -11,15 +11,12 @@ const globaltimeseries = () => {
         }
         fetchApi();
     }, [])
-
-    const dataArray = [data.result];
-    console.log(dataArray)
     if (data === undefined || data.length === 0){
         return <p> Data Loading </p>
     } else {
     return (
         <div>
-            <TimeSeriesGraph graphData={dataArray}/>
+            <TimeSeriesGraph graphData={data}/>
         </div>
     )
     }
