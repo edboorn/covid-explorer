@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const url = 'https://covidapi.info/api/v1'
 
-// Global Totaled Stats
+// Latest Global Count
 export const fetchGlobalStats = async () => {
     try {
         const {data : {date, result}} = await axios.get(`${url}/global`);
@@ -15,7 +15,7 @@ export const fetchGlobalStats = async () => {
     }
 }
 
-//Time Series of Global Data
+//Datewise count of worldwide cases
 export const globalTimeseries = async () => {
     try {
         const {data} = await axios.get(`${url}/global/count`);
@@ -27,7 +27,7 @@ export const globalTimeseries = async () => {
     }
 }
 
-//Time Series of Each Countries Data
+// Global data,broken down by each country in between the data range (Extrememly hard to use/render)
 export const globalBreakdown = async (startDate, endDate) => {
     try {
     const {data : {count, result}} = await axios.get(`${url}/global/timeseries/${startDate}/${endDate}`)
@@ -38,7 +38,7 @@ export const globalBreakdown = async (startDate, endDate) => {
     }
 }
 
-// Time Series of Each countries Data
+// Individual counties timeseries data
 export const countryBreakdown = async (country, startDate, endDate) => {
 
     try {
@@ -50,3 +50,13 @@ export const countryBreakdown = async (country, startDate, endDate) => {
     }
 }
 
+// Get the latest data for each country
+export const countryLatest = async () => {
+    try {
+        const {data} = await axios.get(`${url}/global/latest`)
+        return data
+    }
+    catch (error) {
+        return error
+    }
+}

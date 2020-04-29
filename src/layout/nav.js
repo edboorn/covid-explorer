@@ -8,7 +8,7 @@ import {
 
 // Page Imports
 import Home from "../pages/home/home";
-import About from "../pages/about/about";
+import CountryBreakdown from "../pages/country-breakdown/country-breakdown-page";
 import CountryData from "../pages/country-specific/country-specific";
 
 export default function Nav() {
@@ -24,18 +24,15 @@ export default function Nav() {
             <Link style={navStyle} to="/">
               <li>Home</li>
             </Link>
-            <Link style={navStyle} to="/country-data">
-              <li>Country Data</li>
-            </Link>
-            <Link style={navStyle} to="/About">
-              <li>About this App</li>
+            <Link style={navStyle} to="/countries">
+              <li>Countries</li>
             </Link>
             </ul>
         </nav>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/country-data" exact component={CountryData} />
-          <Route path="/About" exact component={About} />
+          <Route path="/countries" exact component={CountryBreakdown} />
+          <Route path="/country-data/:countryCode" exact component={CountryData} />
         </Switch>
       </div>
     </Router>
