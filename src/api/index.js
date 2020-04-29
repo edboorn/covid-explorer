@@ -8,7 +8,7 @@ const url = 'https://covidapi.info/api/v1'
 export const fetchGlobalStats = async () => {
     try {
         const {data : {date, result}} = await axios.get(`${url}/global`);
-        return {date, result} // TODO : Consider whether there is a need to restructure
+        return {date, result} // TODO : Consider whether there is a need to destructure
     }
     catch (error){
         return error
