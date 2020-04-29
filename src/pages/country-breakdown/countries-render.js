@@ -4,7 +4,6 @@ const countriesrender = (graphData) => {
   let formattedData = Object.entries(
     graphData.graphData
   ).map(([key, value]) => ({ ...value, countryCode: key }));
-  console.log(formattedData);
   return (
     <div className="col-md-4">
       <div className="card mb-4 shadow-sm">

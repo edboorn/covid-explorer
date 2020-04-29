@@ -7,47 +7,7 @@
   box-sizing: border-box;
 }
 
-.mainPage {
-  margin-left: 5%;
-}
 
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 6vh;
-  background : darkgrey;
-  color: white;
-  margin-bottom: 20px;
-}
-
-.navLinks { 
-  width: 25%;
-  display : flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
-}
-
-a:hover, a:visited, a:link, a:active {
-  text-decoration: none;
-}
-  
-.graphRender {
-    width: 100%;
-  }
-
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;
-  }
-
-  .charts { 
-    width: 40rem;
-    max-width: 95%;
-  }
   main{
     padding: 1rem;
     margin: auto;
