@@ -10,7 +10,23 @@
 .container {
   padding-top: 2%;
 }
+
+.footer { 
+  position: fixed;
+  height: 25px;
+  background-color: #343a40;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
+  color: white;
+}
   main{
     padding: 1rem;
     margin: auto;
   }
+
+.socialItemLink:hover, .socialItemLink:visited{
+  color : white;
+  text-decoration: inherit;
+}
