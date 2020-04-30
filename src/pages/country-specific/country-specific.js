@@ -82,6 +82,8 @@ export default function country() {
                     placeholder="StartDate"
                     onChange={updateStartDate}
                     defaultValue={startDate}
+                    min="2020-01-01"
+                    max={todaysDate}
                   />
                 </div>
                 <div className="col-sm-3.5">
@@ -91,6 +93,8 @@ export default function country() {
                     placeholder="EndDate"
                     onChange={updateEndDate}
                     defaultValue={todaysDate}
+                    min="2020-01-01"
+                    max={todaysDate}
                   />
                 </div>
               </div>
