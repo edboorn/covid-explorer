@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, {useEffect, useState} from 'react'
 import {globalTimeseries} from '../../../api/index'
+import Spinner from '../../../layout/spinner'
 
 import TimeSeriesGraph from './global-timeseries-graph'
 const globaltimeseries = () => {
@@ -12,7 +13,7 @@ const globaltimeseries = () => {
         fetchApi();
     }, [])
     if (data === undefined || data.length === 0){
-        return <p> Data Loading </p>
+        return <Spinner/>
     } else {
     return (
         <div>

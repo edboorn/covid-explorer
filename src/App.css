@@ -7,7 +7,9 @@
   box-sizing: border-box;
 }
 
-
+.container {
+  padding-top: 2%;
+}
   main{
     padding: 1rem;
     margin: auto;

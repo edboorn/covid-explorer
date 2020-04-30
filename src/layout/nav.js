@@ -36,6 +36,7 @@ export default function Nav() {
           </ul>
         </div>
       </nav>
+      <div className="container">
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/countries" exact component={CountryBreakdown} />
@@ -45,6 +46,7 @@ export default function Nav() {
           component={CountryData}
         />
       </Switch>
+      </div>
       </>
     </Router>
   );
