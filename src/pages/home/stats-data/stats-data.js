@@ -1,38 +1,34 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from "react";
+import {numberFormatter} from '../../../util'
+import { fetchGlobalStats } from "../../../api/index";
+import Spinner from "../../../layout/spinner";
 
-
-import GlobalStats from './statscomponent'
-
-export default function statsdata() {
-  const [date, setDate] = useState("");
-  const [confirmed, setConfirmed] = useState(0)
-  const [recovered, setRecovered] = useState(0)
-  const [deaths, setDeaths] = useState(0)
+const StatsData = ({ handleStatsChange }) => {
+  const [stats, setStats] = useState([]);
 
   useEffect(() => {
-    fetchGlobalData();
+    const fetchAPI = async () => {
+      setStats(await fetchGlobalStats());
+    };
+    fetchAPI();
   }, []);
-
-  const fetchGlobalData = async () => {
-    const response = await fetch(`https://covidapi.info/api/v1/global`);
-    const data = await response.json();
-    setDate(data.date);
-    setConfirmed(data.result.confirmed)
-    setRecovered(data.result.recovered)
-    setDeaths(data.result.deaths)
-  };
-
-  return (
+  if (stats.result === undefined) {
+    return <p></p> // Not convinced this does a lot, other than to slow the execution long enough for the data to load
+  } else {
+    let formattedConfirmed = numberFormatter(stats.result.confirmed)
+    let formattedRecovered = numberFormatter(stats.result.recovered)
+    let formattedDeaths = numberFormatter(stats.result.deaths)
+    return (
       <div>
-          <GlobalStats 
-          date={date}
-          confirmed={confirmed}
-          recovered={recovered}
-          deaths={deaths}
-          />
+        <h3> How is the world doing on {stats.date} </h3>
+        <p>
+          There are currently {formattedConfirmed} confirmed cases, {formattedRecovered} recoveries and {formattedDeaths} deaths
+        </p>
       </div>
-  )
-}
+    );
+  }
+};
 
+export default StatsData;

@@ -2,107 +2,83 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-
+import { Link, useParams } from "react-router-dom";
+import lookup from "country-code-lookup";
+import {getTodaysDate} from '../../util'
+import Spinner from '../../layout/spinner'
 //Graph Import
 import CountryGraph from "../country-specific/page-components/country-graphs";
+import { countryBreakdown } from "../../api/index";
 
 export default function country() {
-    //Refactor into a utils page
-  const getTodaysDate = (separator = "-") => {
-    let newDate = new Date();
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
-
-    return `${year}${separator}${
-      month < 10 ? `0${month}` : `${month}`
-    }${separator}${date}`;
-  };
+  const todaysDate = getTodaysDate()
   //Top level Datastore
   const [countryData, setCountryData] = useState([]);
-
-  // Date Format is YYYY/MM/DD
   const [startDate, setStartDate] = useState("2020-01-01");
-  const [endDate, setEndDate] = useState(getTodaysDate());
-  const [country, setCountry] = useState("GBR"); // ISO Query on country
+  const [endDate, setEndDate] = useState(todaysDate);
 
-  //Query Fields
-  const [countryQuery, setCountryQuery] = useState("GBR");
-  const [startDateQuery, setStartDateQuery] = useState("2020-01-01");
-  const [EndDateQuery, setEndDateQuery] = useState("2020-04-19");
-
-
+  let params = useParams();
 
   useEffect(() => {
-    fetchCountryData();
-  }, [countryQuery || startDateQuery || EndDateQuery]);
-
-  const fetchCountryData = async () => {
-    const response = await fetch(
-      `https://covidapi.info/api/v1/country/${country}/timeseries/${startDateQuery}/${EndDateQuery}`
-    );
-    const data = await response.json();
-    setCountryData(data.result);
-  };
-
-  const updateSearchTerms = (e) => {
-    setCountry(e.target.value);
-  };
+    const fetchAPI = async () => {
+      setCountryData(
+        await countryBreakdown(params.countryCode, startDate, endDate)
+      );
+    };
+    fetchAPI();
+  }, [startDate,endDate]);
 
   const updateStartDate = (e) => {
-    console.log("start Date", e.target.value);
+    console.log(e.target.value)
     setStartDate(e.target.value);
   };
-
   const updateEndDate = (e) => {
-    console.log("end date", e.target.value);
-    setEndDate(e.target.value);
-  };
-  const getSearch = (e) => {
-    e.preventDefault();
-    setCountryQuery(country);
-    setStartDateQuery(startDate);
-    setEndDateQuery(endDate);
+    setEndDate(e.target.value)
   };
 
-  return (
-    <div>
-      <div className="searchForm">
-        <form
-          id="country-search-form"
-          className="country-search-form"
-          onSubmit={getSearch}
-        >
-          <label>Choose a Country</label>
-          <select className="search-dropdown" onChange={updateSearchTerms}>
-            <option value="GBR">United Kingdom</option>
-            <option value="USA">US</option>
-            <option value="DEU">Germany</option>
-            <option value="FRA">France</option>
-            <option value="CHN">China</option>
-          </select>
-          <label>Start Date</label>
-          <input
-            type="date"
-            name="startDate"
-            value={startDate}
-            onChange={updateStartDate}
-          ></input>
-          <label>End Date</label>
-          <input
-            type="date"
-            name="endDate"
-            value={endDate}
-            max={endDate}
-            onChange={updateEndDate}
-          ></input>
-          <button className="searchButton" type="submit">
-            Update
-          </button>
-        </form>
-        <form></form>
+  if (countryData.result === undefined || countryData.result.length === 0) {
+    return <Spinner/>
+  } else {
+    const formattedCountry = lookup.byIso(params.countryCode);
+    return (
+      <div>
+        <div className="row">
+          <div className="col-sm">
+            <Link to="/countries" className="btn btn-dark btn-sm mb-4">
+              Go Back
+            </Link>
+          </div>
+          <div className="col-sm">
+            <h3>{formattedCountry.country}</h3>
+          </div>
+          <div className="col-sm">
+            <form>
+              <div className="form-row">
+                <div className="col-sm-3.5">
+                  <input
+                    type="date"
+                    className="form-control"
+                    placeholder="StartDate"
+                    onChange={updateStartDate}
+                    defaultValue={startDate}
+                  />
+                </div>
+                <div className="col-sm-3.5">
+                  <input
+                    type="date"
+                    className="form-control"
+                    placeholder="EndDate"
+                    onChange={updateEndDate}
+                    defaultValue={todaysDate}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <CountryGraph graphData={countryData.result} />
       </div>
-      <CountryGraph graphData={countryData} countryTitle={country} />
-    </div>
-  );
+    );
+  }
 }

@@ -11,10 +11,9 @@ import {
   CartesianGrid,
 } from "recharts";
 
-const CountryGraph = ({ graphData, countryTitle }) => {
+const CountryGraph = ({ graphData }) => {
   return (
     <div className="graphRender">
-      <h3> Graph Data for {countryTitle} </h3>
       <ResponsiveContainer width="95%" height={700}>
       <LineChart data={graphData}>
         <Line
