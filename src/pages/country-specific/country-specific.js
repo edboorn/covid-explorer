@@ -44,7 +44,7 @@ export default function country() {
       <div>
         <div className="row">
           <div className="col-sm">
-            <Link to="/countries" className="btn btn-dark btn-sm mb-4">
+            <Link to="/covid-explorer/countries" className="btn btn-dark btn-sm mb-4">
               Go Back
             </Link>
           </div>

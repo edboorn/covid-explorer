@@ -11,7 +11,7 @@ export default function Nav() {
     <Router>
       <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand" href="/covid-explorer">
           COVID-19 Explorer
         </a>
         <button
@@ -27,10 +27,10 @@ export default function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav">
-            <Link className="nav-item" to="/">
+            <Link className="nav-item" to="/covid-explorer">
               <li className="nav-link">Home</li>
             </Link>
-            <Link className="nav-item" to="/countries">
+            <Link className="nav-item" to="/covid-explorer/countries">
               <li className="nav-link">Countries</li>
             </Link>
           </ul>
@@ -38,10 +38,10 @@ export default function Nav() {
       </nav>
       <div className="container">
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/countries" exact component={CountryBreakdown} />
+        <Route path="/covid-explorer" exact component={Home} />
+        <Route path="/covid-explorer/countries" exact component={CountryBreakdown} />
         <Route
-          path="/country-data/:countryCode"
+          path="/covid-explorer/country-data/:countryCode"
           exact
           component={CountryData}
         />

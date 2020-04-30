@@ -26,7 +26,7 @@ const countriesrender = (graphData) => {
           <p> Recovered Cases -{formattedRecovered} </p>
           <p> Deaths - {formattedDeaths} </p>
           <Link
-            to={`/country-data/${formattedData[0].countryCode}`}
+            to={`/covid-explorer/country-data/${formattedData[0].countryCode}`}
             className="btn btn-dark btn-block"
           >
             View More
