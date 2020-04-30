@@ -34,6 +34,10 @@ export default function country() {
   const updateEndDate = (e) => {
     setEndDate(e.target.value);
   };
+  const resetData = () => {
+    setStartDate("2020-01-01")
+    setEndDate(todaysDate)
+  }
 
   if (countryData.isError) {
     return (
@@ -61,7 +65,7 @@ export default function country() {
     return (
       <div>
         <div className="row">
-          <div className="col-sm">
+          <div className="col-sm-2">
             <Link
               to="/covid-explorer/countries"
               className="btn btn-dark btn-sm mb-4"
@@ -69,13 +73,15 @@ export default function country() {
               Go Back
             </Link>
           </div>
-          <div className="col-sm">
+          <div className="col-sm-2">
             <h3>{formattedCountry.country}</h3>
           </div>
-          <div className="col-sm">
+          <div className="col-sm-6">
             <form>
-              <div className="form-row">
-                <div className="col-sm-3.5">
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text"> Start and End Date </span>
+                </div>
                   <input
                     type="date"
                     className="form-control"
@@ -85,8 +91,6 @@ export default function country() {
                     min="2020-01-01"
                     max={todaysDate}
                   />
-                </div>
-                <div className="col-sm-3.5">
                   <input
                     type="date"
                     className="form-control"
@@ -96,9 +100,11 @@ export default function country() {
                     min="2020-01-01"
                     max={todaysDate}
                   />
-                </div>
               </div>
             </form>
+          </div>
+          <div className="col-sm-1">
+          <button type="button" className="btn btn-dark" onClick={resetData}>Reset</button>
           </div>
         </div>
 
