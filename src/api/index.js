@@ -43,10 +43,11 @@ export const countryBreakdown = async (country, startDate, endDate) => {
 
     try {
         const {data : { count, result}} = await axios.get(`${url}/country/${country}/timeseries/${startDate}/${endDate}`)
-        return {count, result}
+        return {count, result, isError : false}
     }
     catch (error) {
-        return error;
+        const errorData = { count :0, result : [], isError : true};
+        return errorData
     }
 }
 

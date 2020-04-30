@@ -4,14 +4,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import lookup from "country-code-lookup";
-import {getTodaysDate} from '../../util'
-import Spinner from '../../layout/spinner'
+import { getTodaysDate } from "../../util";
+import Spinner from "../../layout/spinner";
 //Graph Import
 import CountryGraph from "../country-specific/page-components/country-graphs";
 import { countryBreakdown } from "../../api/index";
 
 export default function country() {
-  const todaysDate = getTodaysDate()
+  const todaysDate = getTodaysDate();
   //Top level Datastore
   const [countryData, setCountryData] = useState([]);
   const [startDate, setStartDate] = useState("2020-01-01");
@@ -26,25 +26,46 @@ export default function country() {
       );
     };
     fetchAPI();
-  }, [startDate,endDate]);
+  }, [startDate, endDate]);
 
   const updateStartDate = (e) => {
-    console.log(e.target.value)
     setStartDate(e.target.value);
   };
   const updateEndDate = (e) => {
-    setEndDate(e.target.value)
+    setEndDate(e.target.value);
   };
 
+  if (countryData.isError) {
+    return (
+      <div>
+        <h1>Ooops!</h1>
+        <h3>There has been an error</h3>
+        <h4>
+          {" "}
+          This may be because you selected dates that are not currently returned
+          by the api
+        </h4>
+        <Link
+          to={`/covid-explorer/country-data/${params.countryCode}`}
+          className="btn btn-dark btn-sm mb-4"
+        >
+          Click me to go back!
+        </Link>
+      </div>
+    );
+  }
   if (countryData.result === undefined || countryData.result.length === 0) {
-    return <Spinner/>
+    return <Spinner />;
   } else {
     const formattedCountry = lookup.byIso(params.countryCode);
     return (
       <div>
         <div className="row">
           <div className="col-sm">
-            <Link to="/covid-explorer/countries" className="btn btn-dark btn-sm mb-4">
+            <Link
+              to="/covid-explorer/countries"
+              className="btn btn-dark btn-sm mb-4"
+            >
               Go Back
             </Link>
           </div>
