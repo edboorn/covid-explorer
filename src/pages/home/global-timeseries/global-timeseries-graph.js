@@ -13,7 +13,7 @@ import {
 const globaltimeseriesgraph = (graphData) => {
   return (
     <div>
-      <ResponsiveContainer width="95%" height={700}>
+      <ResponsiveContainer width="100%" height={700}>
         <LineChart data={graphData.graphData.formattedData}>
           <Line
             strokeWidth={2}

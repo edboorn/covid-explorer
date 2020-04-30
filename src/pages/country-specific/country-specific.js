@@ -3,11 +3,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import lookup from 'country-code-lookup'
 
 //Graph Import
 import CountryGraph from "../country-specific/page-components/country-graphs";
 import { countryBreakdown } from "../../api/index";
 
+ 
 export default function country() {
   //Top level Datastore
   const [countryData, setCountryData] = useState([]);
@@ -23,12 +25,13 @@ export default function country() {
     return <h3> Page is Loading </h3>
   }
   else {
+    const formattedCountry = lookup.byIso(params.countryCode);
   return (
     <div>
       <Link to="/countries" className="btn btn-dark btn-sm mb-4">
         Go Back
       </Link>
-      <h3>{params.countryCode}</h3>
+      <h3>{formattedCountry.country}</h3>
       <CountryGraph graphData={countryData.result}/>
     </div>
   );
