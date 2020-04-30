@@ -46,7 +46,7 @@ export default function country() {
           by the api
         </h4>
         <Link
-          to={`/covid-explorer/country-data/${params.countryCode}`}
+          to="/covid-explorer/countries"
           className="btn btn-dark btn-sm mb-4"
         >
           Click me to go back!
