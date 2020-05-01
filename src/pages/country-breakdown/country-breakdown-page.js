@@ -31,7 +31,7 @@ const countryBreakdown = () => {
             <h3> Last Updated on {data.date}</h3>
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8">
             <form>
@@ -44,7 +44,7 @@ const countryBreakdown = () => {
             </form>
           </div>
           <div className="col-sm-2"></div>
-        </div>
+        </div> */}
         <p></p>
         <div className="row">
           {data.result.map((item, i) => (
