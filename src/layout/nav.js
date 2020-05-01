@@ -40,12 +40,10 @@ export default function Nav() {
           <Route path="/covid-explorer" exact component={Home} />
           <Route
             path="/covid-explorer/countries"
-            exact
             component={CountryBreakdown}
           />
           <Route
             path="/covid-explorer/country-data/:countryCode"
-            exact
             component={CountryData}
           />
         </Switch>
