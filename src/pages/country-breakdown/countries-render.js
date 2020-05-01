@@ -5,15 +5,20 @@ import { numberFormatter } from "../../util";
 import Spinner from "../../layout/spinner";
 
 const countriesrender = (graphData) => {
+
+
   const nullCheck = (countryCode) => {
+    var NewCountryCode = {
+      country: "Code Not Recognised",
+    };
     if (countryCode !== "null") {
       const formattedCountry = lookup.byIso(formattedData[0].countryCode);
-      return formattedCountry;
-    } else {
-      console.log(countryCode)
-      var NewCountryCode = { 
-        country : "N/A"
+      if (formattedCountry !== null) {
+        return formattedCountry;
+      } else {
+        return NewCountryCode;
       }
+    } else {
       return NewCountryCode;
     }
   };
@@ -25,9 +30,7 @@ const countriesrender = (graphData) => {
   let formattedConfirmed = numberFormatter(formattedData[0].confirmed);
   let formattedRecovered = numberFormatter(formattedData[0].recovered);
   let formattedDeaths = numberFormatter(formattedData[0].deaths);
-  //const formattedCountry = lookup.byIso(formattedData[0].countryCode);
-
-  const nullVarCheck = nullCheck(formattedData[0].countryCode);
+  const formattedCountry = nullCheck(formattedData[0].countryCode);
 
   if (formattedConfirmed === null) {
     return <Spinner />;
@@ -36,7 +39,7 @@ const countriesrender = (graphData) => {
       <div className="col-md-4">
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
-            <h3>{formattedData[0].countryCode}</h3>
+            <h3>{formattedCountry.country}</h3>
             <p> Confirmed Cases - {formattedConfirmed} </p>
             <p> Recovered Cases -{formattedRecovered} </p>
             <p> Deaths - {formattedDeaths} </p>
