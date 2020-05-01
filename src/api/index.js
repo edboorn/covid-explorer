@@ -55,6 +55,7 @@ export const countryBreakdown = async (country, startDate, endDate) => {
 export const countryLatest = async () => {
     try {
         const {data} = await axios.get(`${url}/global/latest`)
+        //console.log(data)
         return data
     }
     catch (error) {
