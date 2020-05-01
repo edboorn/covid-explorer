@@ -35,7 +35,7 @@ export default function Nav() {
           </ul>
         </div>
       </nav>
-      <div className="container">
+      <div className="container-flex">
         <Switch>
           <Route path="/covid-explorer" exact component={Home} />
           <Route

@@ -26,12 +26,11 @@ const countriesrender = (graphData) => {
   let formattedData = Object.entries(
     graphData.graphData
   ).map(([key, value]) => ({ ...value, countryCode: key }));
-
   let formattedConfirmed = numberFormatter(formattedData[0].confirmed);
   let formattedRecovered = numberFormatter(formattedData[0].recovered);
   let formattedDeaths = numberFormatter(formattedData[0].deaths);
   const formattedCountry = nullCheck(formattedData[0].countryCode);
-
+  
   if (formattedConfirmed === null) {
     return <Spinner />;
   } else {

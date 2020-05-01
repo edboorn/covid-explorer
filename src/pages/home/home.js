@@ -10,7 +10,13 @@ export default function home() {
             <StatsData />
           </div>
         </div>
-        <GlobalTimeSeries />
+        <div className="row">
+          <div className="col">
+          <GlobalTimeSeries />
+          </div>
+
+        </div>
+
       </div>
     );
 }

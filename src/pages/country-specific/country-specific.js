@@ -11,12 +11,13 @@ import CountryGraph from "../country-specific/page-components/country-graphs";
 import { countryBreakdown } from "../../api/index";
 
 export default function country() {
+
+
   const todaysDate = getTodaysDate();
   //Top level Datastore
   const [countryData, setCountryData] = useState([]);
   const [startDate, setStartDate] = useState("2020-01-01");
   const [endDate, setEndDate] = useState(todaysDate);
-
   let params = useParams();
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function country() {
   if (countryData.result === undefined || countryData.result.length === 0) {
     return <Spinner />;
   } else {
+    console.log(todaysDate)
     const formattedCountry = lookup.byIso(params.countryCode);
     return (
       <div>
@@ -98,7 +100,7 @@ export default function country() {
                     onChange={updateEndDate}
                     defaultValue={todaysDate}
                     min="2020-01-01"
-                    max={todaysDate}
+                    max="{todaysDate}"
                   />
               </div>
             </form>
