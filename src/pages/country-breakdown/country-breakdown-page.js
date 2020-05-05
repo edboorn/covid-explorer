@@ -8,6 +8,24 @@ const countryBreakdown = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState();
 
+  const findCountry = (objList, text) => {
+    if (undefined === text || text === "") return objList;
+    return objList.filter((country) => {
+      let flag;
+      for (let prop in country) {
+        flag = false;
+        flag = country[prop].toString().indexOf(text) > -1;
+        if (flag) break;
+      }
+      return flag;
+    });
+  };
+
+  const searchInput = (e) => {
+    setSearch(findCountry(data.updatedData, e.target.value))
+    console.log(search)
+  };
+
   useEffect(() => {
     const getData = async () => {
       setData(await countryLatest());
@@ -15,12 +33,7 @@ const countryBreakdown = () => {
     getData();
   }, []);
 
-  const searchInput = (e) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
-  };
-
-  if (data.result === undefined) {
+  if (data.updatedData === undefined || data === []) {
     return <Spinner />;
   } else {
     return (
@@ -31,7 +44,7 @@ const countryBreakdown = () => {
             <h3> Last Updated on {data.date}</h3>
           </div>
         </div>
-        {/* <div className="row">
+        <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8">
             <form>
@@ -44,10 +57,10 @@ const countryBreakdown = () => {
             </form>
           </div>
           <div className="col-sm-2"></div>
-        </div> */}
+        </div>
         <p></p>
         <div className="row">
-          {data.result.map((item, i) => (
+          {data.updatedData.map((item, i) => (
             <CountriesRender key={i} graphData={item} />
           ))}
         </div>

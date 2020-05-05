@@ -62,7 +62,6 @@ export default function country() {
   if (countryData.result === undefined || countryData.result.length === 0) {
     return <Spinner />;
   } else {
-    console.log(todaysDate)
     const formattedCountry = lookup.byIso(params.countryCode);
     return (
       <div>
