@@ -20,7 +20,7 @@ const countryBreakdown = () => {
       return flag;
     });
   };
-
+  // Todo, figure out how to map this into the rest of the screen
   const searchInput = (e) => {
     setSearch(findCountry(data.updatedData, e.target.value))
     console.log(search)
