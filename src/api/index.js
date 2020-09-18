@@ -1,5 +1,4 @@
 // Use the page to do any API calls & Data Manipulation
-
 import axios from "axios";
 import lookup from "country-code-lookup";
 
@@ -16,7 +15,7 @@ export const fetchGlobalStats = async () => {
     return error;
   }
 };
-
+ 
 //Datewise count of worldwide cases
 export const globalTimeseries = async () => {
   try {
@@ -65,20 +64,17 @@ export const countryLatest = async () => {
       data: { count, date, result },
     } = await axios.get(`${url}/global/latest`);
 
-    const updatedData = result.map(item => {
-        const[key,value] = Object.entries(item)[0];
-        const countryLookup = lookup.byIso(key);
-        return {
-            data : value,
-            code : key,
-            name : countryLookup ? countryLookup.country : 'No Name'
-        }
-    })
-
+    const updatedData = result.map((item) => {
+      const [key, value] = Object.entries(item)[0];
+      const countryLookup = lookup.byIso(key);
+      return {
+        data: value,
+        code: key,
+        name: countryLookup ? countryLookup.country : "No Name",
+      };
+    });
     return { count, date, updatedData };
   } catch (error) {
     return error;
   }
 };
-
-
